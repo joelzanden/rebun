@@ -35,9 +35,7 @@ jobs:
 
       - name: Create Release with Hub
         run: |
-          gh release create v${{ env.version }} rebun-${{ env.version }}.tar.gz -n "Rebun v${{ env.version }}
-
-          | Asset | SHA256 |
+          gh release create v${{ env.version }} rebun-${{ env.version }}.tar.gz -n "| Asset | SHA256 |
           |-------|--------|
           | rebun-${{ env.version }}.tar.gz | ${{ env.sha256 }} |
 
