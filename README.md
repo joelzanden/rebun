@@ -1,6 +1,6 @@
 # rebun
 
-Like bun run but with delayed restart after crash or completion
+Like bun run but with delayed restart after crash
 
 ## Install with homebrew
 
@@ -11,7 +11,7 @@ brew install joelzanden/tap/rebun
 ## Usage
 
 ```bash
-rebun 60 error-prone-script.ts
+rebun 30 error-prone-script.ts
 ```
 
-This will run the script and restart it after 60 seconds if it crashes or completes.
+This will run the script and restart it after 30 seconds if it crashes.

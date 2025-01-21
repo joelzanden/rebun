@@ -11,6 +11,13 @@ fi
 
 while true; do
     bun run "$SCRIPT_NAME"
-    echo "Script crashed or finished. Waiting $DELAY_SECONDS seconds before restarting..."
-    sleep "$DELAY_SECONDS"
+    EXIT_STATUS=$?
+
+    if [ $EXIT_STATUS -ne 0 ]; then
+        echo "Script crashed. Waiting $DELAY_SECONDS seconds before restarting..."
+        sleep "$DELAY_SECONDS"
+    else
+        echo "Script finished normally. Exiting..."
+        break
+    fi
 done
