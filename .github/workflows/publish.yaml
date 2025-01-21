@@ -24,7 +24,24 @@ jobs:
       - name: Create tarball
         run: tar -czvf rebun-${{ env.version }}.tar.gz rebun
 
+      - name: Calculate SHA256 checksum
+        id: calculate_sha
+        run: echo "sha256=$(shasum -a 256 rebun-${{ env.version }}.tar.gz | awk '{ print $1 }')" >> $GITHUB_ENV
+
+      - name: Get commit messages since last release
+        id: get_commits
+        run: |
+          echo "commits=$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'* %s')" >> $GITHUB_ENV
+
       - name: Create Release with Hub
-        run: gh release create v${{ env.version }} rebun-${{ env.version }}.tar.gz -n "Rebun v${{ env.version }}"
+        run: |
+          gh release create v${{ env.version }} rebun-${{ env.version }}.tar.gz -n "Rebun v${{ env.version }}
+
+          | Asset | SHA256 |
+          |-------|--------|
+          | rebun-${{ env.version }}.tar.gz | ${{ env.sha256 }} |
+
+          ## Commit Messages
+          ${{ env.commits }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
