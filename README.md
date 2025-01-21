@@ -1,6 +1,6 @@
 # rebun
 
- Like bun run but with delayed restart after crash or completion
+Like bun run but with delayed restart after crash or completion
 
 ## Install with homebrew
 
