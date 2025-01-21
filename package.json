@@ -1,0 +1,9 @@
+{
+	"author": "Joel Zandén",
+	"peerDependencies": {
+		"bun": "latest"
+	},
+	"description": "Like bun run but with delayed restart after crash or completion",
+	"name": "rebun",
+	"version": "0.1.0"
+}
