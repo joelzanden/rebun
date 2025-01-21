@@ -1,0 +1,30 @@
+name: Release rebun script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from package.json
+        id: get_version
+        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Rename rebun script
+        run: mv rebun.sh rebun
+
+      - name: Create tarball
+        run: tar -czvf rebun-${{ env.version }}.tar.gz rebun
+
+      - name: Create Release with Hub
+        run: gh release create v${{ env.version }} rebun-${{ env.version }}.tar.gz -n "Rebun v${{ env.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
