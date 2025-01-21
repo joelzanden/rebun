@@ -14,4 +14,3 @@ while true; do
     echo "Script crashed or finished. Waiting $DELAY_SECONDS seconds before restarting..."
     sleep "$DELAY_SECONDS"
 done
-
